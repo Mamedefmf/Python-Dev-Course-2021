@@ -20,13 +20,17 @@ class Pizza:
 class CustomPizza(Pizza):
     BASE_PRICE = 20.0
     PRICE_PER_INGREDIENT = 3.2
+    last_number = 0
 
     def __init__(self):
-        super().__init__("Custom", .0, [])
+        CustomPizza.last_number += 1
+        self.number = CustomPizza.last_number
+        super().__init__("custom " + str(self.number), .0, [])
         self.ask_user_for_ingredients()
         self.compute_price()
 
     def ask_user_for_ingredients(self):
+        print(f"\nIngredients for {self.number}")
         while True:
             ingredient = input("Add an Ingredient (or press ENTER to finish) ")
             if ingredient == "":
@@ -46,6 +50,7 @@ pizzas = [
     Pizza("tuna", 24.99, ("muzzarela cheese", "tuna", "tomato")),
     Pizza("broccoli", 24.99, ("broccoli", "catupiry cheese", "tomato"), True),
     Pizza("special broccoli", 29.99, ("brocolli", "muzzarela cheese", "catupiry cheese", "tomato"), True),
+    CustomPizza(),
     CustomPizza()
 ]
 
