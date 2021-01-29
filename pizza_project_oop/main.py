@@ -2,10 +2,10 @@
 
 class Pizza:
     def __init__(self, name, price, ingredients, vegetarian=False):
-        self.name = name
-        self.price = price
-        self.ingredients = ingredients
-        self.vegetarian = vegetarian
+        self.name = name # creates the instance name
+        self.price = price # creates the instance price
+        self.ingredients = ingredients # creates the instance ingredients
+        self.vegetarian = vegetarian # creates the instance vegetarian
 
     def display(self):
         if self.vegetarian == True:
@@ -23,25 +23,28 @@ class CustomPizza(Pizza):
     last_number = 0
 
     def __init__(self):
-        CustomPizza.last_number += 1
-        self.number = CustomPizza.last_number
-        super().__init__("custom " + str(self.number), .0, [])
+        CustomPizza.last_number += 1 # adds +1 in the variable last_number = 0 in CustomPizza
+        self.number = CustomPizza.last_number # creates the self.number instance with the last_number variable
+        super().__init__("custom pizza " + str(self.number), .0, [])
         self.ask_user_for_ingredients()
         self.compute_price()
 
+# asks the user for the ingredients of the custom pizza
     def ask_user_for_ingredients(self):
-        print(f"\nIngredients for {self.number}")
+        print(f"\nIngredients for {self.number}") # ask the ingredient of the pizza number (self.number)
         while True:
             ingredient = input("Add an Ingredient (or press ENTER to finish) ")
-            if ingredient == "":
-                return
-            self.ingredients.append(ingredient)
-            print(f"You have added {len(self.ingredients)} ingredient(s) : {', '.join(self.ingredients)}")
+            if ingredient == "": # if the user type a empty value ..
+                return # it will return to the beginning of the function
+            self.ingredients.append(ingredient) # if he type a ingredient, it will append to self
+            print(f"You have added {len(self.ingredients)} ingredient(s) : {', '.join(self.ingredients)}") # control
 
-    def compute_price(self):
+    def compute_price(self): # this computes the price per ingredient + base price
         self.price = float(len(self.ingredients)) * self.PRICE_PER_INGREDIENT + self.BASE_PRICE
 
-#
+# parameters
+# def __init__(self,
+#              name,    price,                    ingredients,               vegetarian=False):
 pizzas = [
     Pizza("portuguesa", 29.99, ("muzzarela cheese", "ham", "egg", "onion", "tomato")),
     Pizza("paulista", 29.99, ("muzzarela cheese", "bacon", "tomato")),
@@ -63,5 +66,6 @@ pizzas = [
 # pizzas.sort(key=pizza_sort)
 
 
+# calls the pizza display
 for i in pizzas:
     i.display()
